@@ -18,3 +18,52 @@
     width: 100px;
     height: 100px;
 }
+
+.success{
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.075);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+ 
+}
+.hide{
+    display: none !important;
+}
+.show{
+    display: flex !important;
+}
+
+.success .inner{
+    height: 350px;
+    width: 350px;
+    background-color: white;
+    padding: 50px;
+}
+
+
+.icon i{
+   font-size: 70px;
+}
+.icon2 i{
+   font-size: 40px;
+}
+
+.black i{
+    color: black !important ;
+    font-size: 40px;
+
+}
+
+.closed:hover{
+    color:#acea00;
+    cursor: pointer;
+}
+
+.iom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

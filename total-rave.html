@@ -17,8 +17,16 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css" integrity="sha512-OivR4OdSsE1onDm/i3J3Hpsm5GmOVvr9r49K3jJ0dnsxVzZgaOJ5MfxEAxCyGrzWozL9uJGKz6un3A7L+redIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css" integrity="sha512-qzgHTQ60z8RJitD5a28/c47in6WlHGuyRvMusdnuWWBB6fZ0DWG/KyfchGSBlLVeqAz+1LzNq+gGZkCSHnSd3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <link rel="stylesheet" href="assets/css/binaz.css">
 	<script src="https://cdn.tailwindcss.com"></script>
+	
 </head>
 
 
@@ -88,20 +96,20 @@
 					<span class="theme-text mt-4">Subscribe to our newsletter and stay updated on the latest music albums, live shows and music releases.</span>
 					<form class="subs-form">
 						<div class="input-field">
-							<input type="email" name="email" placeholder="Enter your Fullname">
+							<input class="fullname" type="text" name="email" placeholder="Enter your Fullname">
 							<span class="em-icon"><i class="fa fa-user theme-text"></i></span>
 						</div>
 						<div class="input-field">
-							<input type="email" name="email" placeholder="Enter your email address">
+							<input class="email" type="email" name="email" placeholder="Enter your email address">
 							<span class="em-icon"><i class="fa fa-envelope theme-text"></i></span>
 						</div>
 
 						<div class="input-field">
-							<input type="email" name="email" placeholder="Enter your Phone number">
+							<input class="phone" type="text" name="email" placeholder="Enter your Phone number">
 							<span class="em-icon"><i class="fa fa-envelope theme-text"></i></span>
 						</div>
 
-						<button type="submit" class="theme-btn bg-green"><i class="fa fa-check"></i> Register</button>
+						<button id="button" type="button" class="theme-btn bg-green button_"><i class="fa fa-check"></i> Register</button>
 					</form>
 				</div><!--subscribe-section end-->
 			</div>
@@ -134,8 +142,47 @@
 			</div>
 		</footer><!--footer end-->
 
-	</div><!--wrapper end-->
+		<div class="success good flex items-center justify-center hide">
+			<div class="inner flex flex-col items-center justify-center rounded">
+				<span class="icon"><i class="fa fa-check theme-text"></i></span>
 
+				<p class="text-center mt-1">You have successfully registered to attend Sigag Lauren's Total Rave!
+					Get readey to RAVE!
+				</p>
+
+
+				<div class="buttons flex gap-10 mt-10">
+
+					<a href="https://open.spotify.com/artist/0CYHsfVyqOajHaAn2uqZzA?si=ZTkRADl0T-O3-g1C--wLWQ"><span class="icon2"><i class="fa-brands fa-spotify theme-text"></i></span></a>
+					<a href="https://music.apple.com/ng/artist/sigag-lauren/1443085885"><span class="icon2 black"><i class="fa-brands fa-apple theme-text"></i></span></a> 
+
+					
+				</div>
+
+				<p class="closed mt-10">close</p>
+			</div>
+		</div>
+
+		<div class="success already-exist flex items-center justify-center hide">
+			<div class="inner flex flex-col items-center justify-center rounded">
+
+				<p class="text-center mt-1">You have already registered to attend Sigag Lauren's Total Rave!
+					Get readey to RAVE!
+				</p>
+
+
+				<div class="buttons flex gap-10 mt-10">
+
+					<a href="https://open.spotify.com/artist/0CYHsfVyqOajHaAn2uqZzA?si=ZTkRADl0T-O3-g1C--wLWQ"><span class="icon2"><i class="fa-brands fa-spotify theme-text"></i></span></a>
+					<a href="https://music.apple.com/ng/artist/sigag-lauren/1443085885"><span class="icon2 black"><i class="fa-brands fa-apple theme-text"></i></span></a> 
+
+					
+				</div>
+
+				<p class="closed mt-10">close</p>
+			</div>
+
+	</div><!--wrapper end-->
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/jquery-migrate-1.4.1.min.js"></script>
@@ -148,6 +195,61 @@
 <script src="assets/js/plugin/isotope.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/script.js"></script>
+
+
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+$(document).ready( function(){
+	
+	
+
+	$('#button').click( async function(e){
+		// e.preventDefault();
+		try{
+
+			const email = $('.email').val();
+			const fullname =  $('.fullname').val();
+			const phone = $('.phone').val()
+			const data = {
+				"fullname" : fullname,
+				"email" : email,
+				"phone" : phone,
+			}
+			
+			const res = await axios.post('https://sigag-lauren.herokuapp.com/fans', data);
+			console.log(res)
+			console.log(email)
+
+			$('.good').removeClass('hide')
+			$('.good').addClass('show')
+
+
+			
+		} catch(err){
+			console.log(err.message)
+			$('.already-exist').removeClass('hide')
+			$('.already-exist').addClass('show')
+
+			console.log(err.status)
+		}
+		
+	});
+
+	$('.closed').click( () => {
+		$('.success').removeClass('show')
+		$('.success').addClass('hide')
+	})
+});
+
+// $('#button').click( function(e){
+// 	e.preventDefault();
+// 	console.log('jonesss');
+// })
+
+</script>
+
 
 </body>
 
