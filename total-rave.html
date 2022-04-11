@@ -93,7 +93,7 @@
 
 					<h3 class="text-5xl font-bold white text-white ">April 15th, 2022</h3>
 					
-					<span class="theme-text mt-4">Subscribe to our newsletter and stay updated on the latest music albums, live shows and music releases.</span>
+					<span class="theme-text mt-4">Come ready to RAVE</span>
 					<form class="subs-form">
 						<div class="input-field">
 							<input class="fullname" type="text" name="email" placeholder="Enter your Fullname">
@@ -109,7 +109,7 @@
 							<span class="em-icon"><i class="fa fa-phone theme-text"></i></span>
 						</div>
 
-						<button id="button" type="button" class="theme-btn bg-green button_"><i class="fa fa-check"></i> Register</button>
+						<button id="button" type="button" class="theme-btn bg-green button_"><i class="fa fa-check"></i> Register  <div id="loader" class="loader hide"></div>  </button>
 					</form>
 				</div><!--subscribe-section end-->
 			</div>
@@ -207,6 +207,9 @@ $(document).ready( function(){
 
 	$('#button').click( async function(e){
 		// e.preventDefault();
+
+		$('#loader').addClass('show');
+		$('#loader').removeClass('hide');
 		try{
 
 			const email = $('.email').val();
@@ -218,9 +221,14 @@ $(document).ready( function(){
 				"phone" : phone,
 			}
 			
+			console.log('submitting data');
+			// const res = await axios.post('http://localhost:9800/fans', data);
 			const res = await axios.post('https://sigag-lauren.herokuapp.com/fans', data);
 			console.log(res)
 			console.log(email)
+
+			$('#loader').addClass('hide');
+			$('#loader').removeClass('show');
 
 			$('.good').removeClass('hide')
 			$('.good').addClass('show')
@@ -228,11 +236,15 @@ $(document).ready( function(){
 
 			
 		} catch(err){
+			$('#loader').addClass('hide');
+			$('#loader').removeClass('show');
 			console.log(err.message)
-			$('.already-exist').removeClass('hide')
-			$('.already-exist').addClass('show')
+			// $('.already-exist').removeClass('hide')
+			// $('.already-exist').addClass('show')
 
 			console.log(err.status)
+		} finally {
+			console.log('done');
 		}
 		
 	});
