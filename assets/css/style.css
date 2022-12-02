@@ -3424,6 +3424,7 @@ header.sticky .social-links.hd-v li a:hover {
 .rave_text {
   font-size: 80px;
   margin-right: 0;
+  line-height: 0.9;
 }
 
 @media screen and(max-width: 767px) {
