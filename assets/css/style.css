@@ -1696,6 +1696,7 @@ a.jp-playlist-item.jp-playlist-current {
   position: absolute;
   top: 0;
   right: 100%;
+  left: 0;
   width: 130px;
 }
 .lg-social li a {
@@ -3015,7 +3016,6 @@ header.sticky .social-links.hd-v li a:hover {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: #a829aa;
   width: 85px;
   height: 3px;
 }
@@ -3432,3 +3432,5 @@ header.sticky .social-links.hd-v li a:hover {
     font-size: 35px;
   }
 }
+
+/* ===========modified contact music page============= */
