@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import styles from './newLetterStyles.module.scss';
+import { addFormData } from '../../Api/firebase';
+import { ColorRing } from 'react-loader-spinner';
 import {
   validateForm,
   validateEmailField,
   validateField,
 } from '../../Utilities/validateInputs';
 import { motion } from 'framer-motion';
+import { ERRORICON, SUCCESSICON } from '../../assets/images';
 
 const NewsLetter = () => {
   const [formData, setFormData] = useState({ name: '', email: '' });
+  const [responseMessage, setResponseMessage] = useState({
+    message: '',
+    success: null,
+  });
+  const [showResponseMsg, setShowResponseMsg] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
   const [errors, setErrors] = useState({
     name: '',
     email: '',
@@ -31,13 +40,26 @@ const NewsLetter = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm(formData, setErrors)) {
-      console.log(formData);
-      setFormData({ ...formData, name: '', email: '' });
-    } else {
-      console.log('Form is invalid');
+    setIsloading(true);
+    try {
+      if (validateForm(formData, setErrors)) {
+        await addFormData(formData);
+        setFormData({ ...formData, name: '', email: '' });
+        setResponseMessage({ message: 'sent successfully', success: true });
+        setShowResponseMsg(true);
+      } else {
+        throw new Error('invalid details');
+      }
+    } catch (error) {
+      setResponseMessage({ message: `${error.message}`, success: false });
+      setShowResponseMsg(true);
+    } finally {
+      setIsloading(false);
+      setTimeout(() => {
+        setShowResponseMsg(false);
+      }, 3000);
     }
   };
 
@@ -56,6 +78,22 @@ const NewsLetter = () => {
           and explore our store for incredible merchandise that amplifies your
           love for music!
         </p>
+
+        {showResponseMsg && (
+          <p
+            className={`${styles.newsLetter__responseMessage} ${
+              responseMessage.success ? styles.success : styles.error
+            }`}
+          >
+            <span className={styles.newsLetter__responseIcon}>
+              <img
+                src={responseMessage.success ? SUCCESSICON : ERRORICON}
+                alt={responseMessage.success ? 'succcess-icon' : 'error-icon'}
+              />
+            </span>
+            {responseMessage.message}
+          </p>
+        )}
 
         <div className={styles.newsLetter__formGroup}>
           <label htmlFor='name'>
@@ -97,8 +135,23 @@ const NewsLetter = () => {
           className={styles.newsLetter__button}
           onClick={handleSubmit}
           whileTap={{ scale: 0.96 }}
+          disabled={isLoading}
         >
-          Subscribe
+          {isLoading ? (
+            <div className={styles.newsLetter__loadingContainer}>
+              <ColorRing
+                visible={true}
+                height='80'
+                width='80'
+                ariaLabel='blocks-loading'
+                wrapperStyle={{}}
+                wrapperClass='blocks-wrapper'
+                colors={['#a6d49f', '#9ac2a6', '#87b6a7', '#76aba8', '#6b9ea7']}
+              />
+            </div>
+          ) : (
+            'subscribe'
+          )}
         </motion.button>
       </form>
     </div>

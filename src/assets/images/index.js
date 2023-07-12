@@ -22,6 +22,8 @@ import BANNER3MOBILE from './resources/backgrounds/bgmobile.jpg';
 import FOOTERICON from './ft-logo.png';
 import MINDSMADELANDSCAPE from './resources/banner/MadeUpLandscape.webp';
 import ERROR from './resources/banner/error.jpg';
+import SUCCESSICON from './icons/successIcon.png';
+import ERRORICON from './icons/ErrorIcon.png';
 
 export {
   ERROR,
@@ -48,4 +50,6 @@ export {
   MINDSMADELANDSCAPE,
   BANNER3MOBILE,
   FOOTERICON,
+  SUCCESSICON,
+  ERRORICON,
 };

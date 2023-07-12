@@ -2,7 +2,7 @@
 
 .subscribe {
   width: 100%;
-  height: 85vh;
+  min-height: 85vh;
   position: relative;
   @include a.centerItem;
   flex-direction: column;
