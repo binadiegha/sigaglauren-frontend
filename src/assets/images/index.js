@@ -11,10 +11,7 @@ import SPOTIFY from './icons/spotify.png';
 import MUSIC from './icons/music.png';
 import PLAY from './icons/play.png';
 import SOUNDIMAGE from './music/soundFromInternet.png';
-import BATURE from './music/Bature.png';
-import UYO from './music/Uyo.png';
 import PARTYNIGHT from './music/partyNight.png';
-import WATER from './music/Water.png';
 import MINDSMALLSCREEN from './music/MindSmallScreenImg.png';
 import REMIXTAPE2 from './music/remixTape (2).png';
 import BANNER3MOBILE from './resources/backgrounds/bgmobile.jpg';
@@ -39,11 +36,8 @@ export {
   PLAY,
   MUSIC,
   SOUNDIMAGE,
-  BATURE,
-  UYO,
   REMIXTAPE2,
   PARTYNIGHT,
-  WATER,
   MINDSMALLSCREEN,
   MINDSMADELANDSCAPE,
   BANNER3MOBILE,
